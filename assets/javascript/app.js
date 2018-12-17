@@ -15,116 +15,74 @@ isTrue = false;
 var clockRunning = false;
 var timeRemaining = 30;
 intervalId = setInterval(timerCountdown, 1000);
-var questionsArray = [{question: "A canine's sense of smell is 100,000x stronger than a human's", answer: "True"}, { question: "Three dogs survived the sinking of the Titanic", answer: "True"},{question: "Dalmations are born with spots", answer: "False"}, {question: "Dogs’eyes contain a special membrane, which allows them to see in the dark.", answer: "True"}, {question: "Dogs have only two eyelids, just like us", answer: "False"}, {question: "Dogs are colorblind.", answer: "False"}, {question: "Dogs only sweat through the pads of their feet", answer: "True"}, {question: "Dogs that have not been spayed or neutered live longer", answer: "False"}, {question: "Every single U.S. President has owned a dog", answer: "False"}, {question: "The shape of a dog’s face suggests its longevity: A long face means a longer life.", answer: "True"}];
-//var trueQuestionsArray = ["A canine's sense of smell is 100,000x stronger than a human's", "Three dogs survived the sinking of the Titanic", "Dogs’eyes contain a special membrane, which allows them to see in the dark.", "Dogs only sweat through the pads of their feet", "The shape of a dog’s face suggests its longevity: A long face means a longer life."];
-//var falseQuestionArray = ["Dalmations are born with spots", "Dogs have only two eyelids, just like us", "Dogs are colorblind.", "Dogs that have not been spayed or neutered live longer", "Every single U.S. President has owned a dog"];
-//var randQuestionSelection = [];
-//var combinedQuestions = trueQuestionsArray.concat(falseQuestionArray);
+var questionsArray = [{question: "A canine's sense of smell is 100,000x stronger than a human's", answer: "True"}, { question: "Three dogs survived the sinking of the Titanic", answer: "True"},{question: "Dalmations are born with spots", answer: "False"}, {question: "Dogs’eyes contain a special membrane, which allows them to see in the dark.", answer: "True"}, {question: "Dogs have only two eyelids, just like us", answer: "False"}, {question: "Dogs are colorblind.", answer: "False"}, {question: "Dogs only sweat through the pads of their feet", answer: "True"}, {question: "Dogs that have not been spayed or neutered live longer", answer: "False"}, {question: "Every single U.S. President has owned a dog", answer: "False"}, {question: "The shape of a dog’s face suggests its longevity: A long face means a longer life.", answer: "True"}, {question: "Game Over"}];
 var randGif;
 
 function displayQuestion(){
-    
-    
-    //randQuestionSelection = combinedQuestions[Math.floor(Math.random() * combinedQuestions.length)];
-     randGif = Math.floor(Math.random() * 20);
-
+    randGif = Math.floor(Math.random() * 20);
     timerCountdown();
-
     for(var i = 0; i < questionsArray.length; i++){
         console.log(questionsArray[i].question);
         var questionDisplay = $("#question").text(questionsArray[i].question);
+    }
+    $("#question").text(questionsArray[0].question);
 }
-$("#question").text(questionsArray[0].question);
-
-}
-
-        //console.log(randQuestionSelection);
-        //console.log(isTrue);
-    
 
 
 function nextQuestion(){
-    
-     //combinedQuestions = trueQuestionsArray.concat(falseQuestionArray);
-     //randQuestionSelection = combinedQuestions[Math.floor(Math.random() * combinedQuestions.length)];
-     randGif = Math.floor(Math.random() * 20);
+    randGif = Math.floor(Math.random() * 20);
     intervalId = setInterval(timerCountdown, 1000);
     timeRemaining = 30;
     //timerCountdown();
     $("#gifPic").html("");
     $("#answer").text("");
-    
     displayQuestion();
     
-    }
-   
-
-
-/*
-    for(var i = 0; i < combinedQuestions.length; i++){
-        
-       if(randQuestionSelection === trueQuestionsArray[0] || randQuestionSelection === trueQuestionsArray[1] || randQuestionSelection === trueQuestionsArray[2] || randQuestionSelection === trueQuestionsArray[3] || randQuestionSelection === trueQuestionsArray[4]) {
-           isTrue = true;
-           
-       } else {
-           isTrue = false;
-       }
-       combinedQuestions.splice(combinedQuestions.indexOf(randQuestionSelection,1));
-        $("#question").text(randQuestionSelection);
-       }
-
-       
-       console.log(randQuestionSelection);
-        console.log(isTrue);
-    }
-       
-       */
-       
-
-function removeUsedQuestion() {
-    
-    if(randQuestionSelection === trueQuestionsArray[0]){
-        trueQuestionsArray.splice(0,1);
-    } else if(randQuestionSelection === trueQuestionsArray[1]){
-        trueQuestionsArray.splice(1,1);
-    } else if(randQuestionSelection === trueQuestionsArray[2]){
-        trueQuestionsArray.splice(2,1);
-    } else if(randQuestionSelection === trueQuestionsArray[3]){
-        trueQuestionsArray.splice(3,1);
-    } else if(randQuestionSelection ===trueQuestionsArray[4]){
-        trueQuestionsArray.splice(4,1);
-    } else if(randQuestionSelection === combinedQuestions[5]){
-        combinedQuestions.splice(5,1);
-    } else if(randQuestionSelection === combinedQuestions[6]){
-        combinedQuestions.splice(6,1);
-    } else if(randQuestionSelection === combinedQuestions[7]){
-        combinedQuestions.splice(7,1);
-    } else if(randQuestionSelection === combinedQuestions[8]){
-        combinedQuestions.splice(8,1);
-    } else if(randQuestionSelection === combinedQuestions[9]){
-        combinedQuestions.splice(9,1);
+    if(questionsArray[0].question === "Game Over"){
+        endGame();
     }
 }
+   
 
 function timerCountdown() {
-    if (timeRemaining == 0) {
+    if (timeRemaining == 0 && questionsArray.length > 0) {
+        $("#answer").text("Time's Up!");
+        $("#timer").text("0 Seconds Remaining");
       clearTimeout(intervalId);
-      //doSomething();
+
+      $.ajax({
+        url: "http://api.giphy.com/v1/gifs/search?q=sad+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+        method: "GET"
+      }).then(function(response) {
+          
+          $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
+          
+      });
+      wrongAnswer++;
+      questionsArray.splice(0,1);
+      setTimeout(nextQuestion, 5000);
     } else {
         $("#timer").text(timeRemaining + " Seconds Remaining");
       timeRemaining--;
     }
   }
 
-/*function winsAndLosses() {
-    if(isTrue){
-       correctAnswer++;
-    } else {
-        wrongAnswer++;
-    }
-    console.log("number of wins " + correctAnswer);
-    console.log("number of losses " + wrongAnswer)
-}*/
+  function endGame(){
+    timeRemaining = 0;
+    clearTimeout(intervalId);
+    clearTimeout(setTimeout);
+    $("#question").html("Correct Answers: " + correctAnswer + "\n" + "Incorrect Answers: " + wrongAnswer).wrap('<pre />');
+    $("#timer").text("");
+    $("#trueButton").html("");
+    $("#falseButton").html("");
+    $.ajax({
+        url: "http://api.giphy.com/v1/gifs/search?q=funny+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+        method: "GET"
+      }).then(function(response) { 
+          $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
+      });
+  }
+
 
 displayQuestion();
 
@@ -143,11 +101,25 @@ displayQuestion();
         questionsArray.splice(0,1);
         clearInterval(intervalId);
         setTimeout(nextQuestion, 5000);
-        
         console.log("number of wins " + correctAnswer);
         console.log("number of losses " + wrongAnswer);
         
-        
+        } else if(questionsArray.length === 1){
+            $("#answer").text("Correct!");
+            correctAnswer++;
+            $.ajax({
+                url: "http://api.giphy.com/v1/gifs/search?q=happy+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+                method: "GET"
+              }).then(function(response) {
+                  $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");  
+              });
+              
+            clearInterval(intervalId);
+            
+            console.log("number of wins " + correctAnswer);
+            console.log("number of losses " + wrongAnswer);
+            
+
         } else {
             $("#answer").text("Wrong!");
             wrongAnswer++;
@@ -163,12 +135,13 @@ displayQuestion();
             questionsArray.splice(0,1);
              clearInterval(intervalId);
              setTimeout(nextQuestion, 5000);
-             
              console.log("number of wins " + correctAnswer);
              console.log("number of losses " + wrongAnswer);
              
         }
-    });
+
+    } );
+
     $("#falseButton").on("click", function(){
         if(questionsArray[0].answer === "False" ){
         $("#answer").text("Correct");
@@ -203,7 +176,7 @@ displayQuestion();
                 });
               clearInterval(intervalId);
               setTimeout(nextQuestion, 5000);
-              
+             
               questionsArray.splice(0,1);
               console.log("number of wins " + correctAnswer);
               console.log("number of losses " + wrongAnswer);
