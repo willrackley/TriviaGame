@@ -118,7 +118,7 @@ function timerCountdown() {
       clearTimeout(intervalId);
       clockRunning = false;
       $.ajax({
-        url: "http://api.giphy.com/v1/gifs/search?q=sad+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+        url: "http://api.giphy.com/v1/gifs/search?q=mad+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
         method: "GET"
       }).then(function(response) {
           
