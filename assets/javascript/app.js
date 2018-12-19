@@ -6,7 +6,7 @@ var timeRemaining = 30;
 var indexIncrement = 0;
 var intervalId;
 var clockRunning = false;
-var questionsArray = [{question: "A canine's sense of smell is 100,000x stronger than a human's", answer: "True"}, { question: "Three dogs survived the sinking of the Titanic", answer: "True"},{question: "Dalmations are born with spots", answer: "False"}/*, {question: "Dogs’eyes contain a special membrane, which allows them to see in the dark.", answer: "True"}, {question: "Dogs have only two eyelids, just like us", answer: "False"}, {question: "Dogs are colorblind.", answer: "False"}, {question: "Dogs only sweat through the pads of their feet", answer: "True"}, {question: "Dogs that have not been spayed or neutered live longer", answer: "False"}, {question: "Every single U.S. President has owned a dog", answer: "False"}, {question: "The shape of a dog’s face suggests its longevity: A long face means a longer life.", answer: "True"}*/, {question: "Game Over"}];
+var questionsArray = [{question: "A canine's sense of smell is 100,000x stronger than a human's", answer: "True"}, { question: "Three dogs survived the sinking of the Titanic", answer: "True"},{question: "Dalmations are born with spots", answer: "False"}, {question: "Dogs’eyes contain a special membrane, which allows them to see in the dark.", answer: "True"}, {question: "Dogs have only two eyelids, just like us", answer: "False"}, {question: "Dogs are colorblind.", answer: "False"}, {question: "Dogs only sweat through the pads of their feet", answer: "True"}, {question: "Dogs that have not been spayed or neutered live longer", answer: "False"}, {question: "Every single U.S. President has owned a dog", answer: "False"}, {question: "The shape of a dog’s face suggests its longevity: A long face means a longer life.", answer: "True"}, {question: "Game Over"}];
 var randGif;
 
 function startGame(){
@@ -137,7 +137,7 @@ function determineFalseAnswer(){
         clearInterval(intervalId);
         setTimeout(nextQuestion, 5000);
     } else {
-        $("#answer").text("Wrong!");
+        $("#answer").text("Wrong! The correct answer is " + questionsArray[indexIncrement].answer);
         
         wrongAnswer++;
             $.ajax({
@@ -168,7 +168,7 @@ function determineTrueAnswer(){
         clearInterval(intervalId);
         setTimeout(nextQuestion, 5000);
         } else {
-            $("#answer").text("Wrong!");
+            $("#answer").text("Wrong! The correct answer is " + questionsArray[indexIncrement].answer);
             wrongAnswer++;
 
             $.ajax({
@@ -213,7 +213,7 @@ $("#trueButton").one("click", function(){
     setTimeout(nextQuestion, 5000);
     
     } else {
-        $("#answer").text("Wrong!");
+        $("#answer").text("Wrong! The correct answer is " + questionsArray[indexIncrement].answer);
         wrongAnswer++;
         $.ajax({
             url: "http://api.giphy.com/v1/gifs/search?q=sad+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
@@ -244,7 +244,7 @@ $("#falseButton").one("click", function(){
     setTimeout(nextQuestion, 5000);
 
     } else {
-        $("#answer").text("Wrong!");
+        $("#answer").text("Wrong! The correct answer is " + questionsArray[indexIncrement].answer);
         
         wrongAnswer++;
           $.ajax({
