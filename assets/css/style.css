@@ -11,7 +11,6 @@ h1{
     border-bottom: 3px solid #ffffff;
     border-top: 3px solid #ffffff;
     font-family: 'Titan One', cursive, 'Times New Roman', Times, serif; 
-
 }
 
 .gamePlayDiv{
@@ -23,6 +22,7 @@ h1{
     border: 5px solid #d3d3d3;
     overflow: auto;
 }
+
 p {
     text-align: center;
     font-family: 'Oswald', sans-serif;
@@ -40,14 +40,12 @@ p {
   border-radius: 15px;
   padding: 10px;
   background: #d3d3d3;
-  
 }
 
 button:hover {
     background: #f8c845;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
-
 
 #tryAgainButton {
     display: none;
