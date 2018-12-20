@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+//----VARIABLES----//
 var correctAnswer = 0;
 var wrongAnswer = 0;
 var timeRemaining = 30;
@@ -9,6 +10,7 @@ var clockRunning = false;
 var questionsArray = [{question: "A canine's sense of smell is 100,000x stronger than a human's", answer: "True"}, { question: "Three dogs survived the sinking of the Titanic", answer: "True"},{question: "Dalmations are born with spots", answer: "False"}, {question: "Dogs’eyes contain a special membrane, which allows them to see in the dark.", answer: "True"}, {question: "Dogs have only two eyelids, just like us", answer: "False"}, {question: "Dogs are colorblind.", answer: "False"}, {question: "Dogs only sweat through the pads of their feet", answer: "True"}, {question: "Dogs that have not been spayed or neutered live longer", answer: "False"}, {question: "Every single U.S. President has owned a dog", answer: "False"}, {question: "The shape of a dog’s face suggests its longevity: A long face means a longer life.", answer: "True"}, {question: "Game Over"}];
 var randGif;
 
+//----FUNCTIONS----//
 function startGame(){
     clearTimeout(intervalId);
     clockRunning = false;
@@ -25,6 +27,7 @@ function displayQuestion(){
     $("#gifPic").html("");
     $("#trueButton").show();
     $("#falseButton").show();
+    timeRemaining = 10;
     clockRunning = true;
     intervalId = setInterval(timerCountdown, 1000);
     console.log("number of wins " + correctAnswer);
@@ -34,10 +37,10 @@ function displayQuestion(){
 }
 
 function nextQuestion(){
-    $("trueButton").data('clicked', false);
+    
     $("#startButton").hide();
     randGif = Math.floor(Math.random() * 20);
-    timeRemaining = 30;
+    timeRemaining = 10;
     intervalId = setInterval(timerCountdown, 1000);
     clockRunning = true;
     $("#trueButton").show();
@@ -48,7 +51,8 @@ function nextQuestion(){
     $("#question").text(questionsArray[indexIncrement].question);
     $("#falseButton").one("click", determineFalseAnswer);
     $("#trueButton").one("click", determineTrueAnswer);
-    
+
+
     if(questionsArray[indexIncrement].question === "Game Over"){
         clockRunning = false;
         endGame();
@@ -57,9 +61,9 @@ function nextQuestion(){
    
    
 function timerCountdown() {
-    if (clockRunning = false || timeRemaining === 0) {
+    if (timeRemaining === 0) {
       clearTimeout(intervalId);
-      $("#answer").text("Time's Up!");
+      $("#answer").text("Time's up! The correct answer is " + questionsArray[indexIncrement].answer);
       $("#timer").text("0 Seconds Remaining");
       $("#trueButton").hide();
       $("#falseButton").hide();
@@ -72,7 +76,8 @@ function timerCountdown() {
       });
       wrongAnswer++;
       clockRunning = false;
-      setTimeout(nextQuestion, 5000);
+      setTimeout(endGame, 5000);
+      
     } else {
         var converted = timeConverter(timeRemaining);
         $("#timer").text(converted + " Seconds Remaining");
@@ -105,6 +110,7 @@ function endGame(){
     clockRunning = false;
     $("#question").html("Correct Answers: " + correctAnswer + "\n" + "Incorrect Answers: " + wrongAnswer).wrap('<pre />');
     $("#timer").text("");
+    $("#answer").text("");
     $("#trueButton").hide();
     $("#falseButton").hide();
     $("#startButton").hide()
@@ -136,6 +142,7 @@ function determineFalseAnswer(){
           });
         clearInterval(intervalId);
         setTimeout(nextQuestion, 5000);
+    
     } else {
         $("#answer").text("Wrong! The correct answer is " + questionsArray[indexIncrement].answer);
         
@@ -146,13 +153,15 @@ function determineFalseAnswer(){
             }).then(function(response) { 
                 $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
             });
-            
+           
             clearInterval(intervalId);
             setTimeout(nextQuestion, 5000);
+            
     }
 }
 
 function determineTrueAnswer(){
+    
     $("#falseButton").off('click');
     if(questionsArray[indexIncrement].answer === "True" ){
         $("#answer").text("Correct!");
@@ -167,6 +176,8 @@ function determineTrueAnswer(){
           
         clearInterval(intervalId);
         setTimeout(nextQuestion, 5000);
+
+        
         } else {
             $("#answer").text("Wrong! The correct answer is " + questionsArray[indexIncrement].answer);
             wrongAnswer++;
@@ -180,6 +191,7 @@ function determineTrueAnswer(){
             
             clearInterval(intervalId);
             setTimeout(nextQuestion, 5000);
+        
         }
 }
 
@@ -197,6 +209,7 @@ $("#tryAgainButton").on("click", function(){
 
 
 $("#trueButton").one("click", function(){
+    
     $("#falseButton").off("click");
     if(questionsArray[indexIncrement].answer === "True" ){
     $("#answer").text("Correct!");
@@ -211,7 +224,7 @@ $("#trueButton").one("click", function(){
       
     clearInterval(intervalId);
     setTimeout(nextQuestion, 5000);
-    
+   
     } else {
         $("#answer").text("Wrong! The correct answer is " + questionsArray[indexIncrement].answer);
         wrongAnswer++;
@@ -228,6 +241,7 @@ $("#trueButton").one("click", function(){
 });
 
 $("#falseButton").one("click", function(){
+    
     $("#trueButton").off("click");
     if(questionsArray[indexIncrement].answer === "False" ){
     $("#answer").text("Correct");
