@@ -21,6 +21,7 @@ h1{
     padding: 10px;
     border: 5px solid #d3d3d3;
     overflow: auto;
+    z-index: 1;
 }
 
 p {
@@ -64,4 +65,23 @@ button:hover {
 body{
     background-image: url(../images/dogBackground.jpg);
     background-size: 25% ;
+}
+
+@media screen and (max-width: 425px){
+    h1{
+        font-size: 100px;
+        margin-top: -8px;
+    }
+
+    .gamePlayDiv{
+        max-width: 340px;
+        margin-top: -40px;
+    }
+
+    p {
+       font-size: 30px;
+    }
+    .vector{
+        display: none;
+    }
 }

@@ -77,7 +77,7 @@ function timerCountdown() {
       });
       wrongAnswer++;
       clockRunning = false;
-      setTimeout(endGame, 5000);
+      setTimeout(endGame, 3000);
       
     } else {
         var converted = timeConverter(timeRemaining);
@@ -142,7 +142,7 @@ function determineFalseAnswer(){
               $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
           });
         clearInterval(intervalId);
-        setTimeout(nextQuestion, 5000);
+        setTimeout(nextQuestion, 3000);
     
     } else {
         $("#answer").text("Wrong! The correct answer is " + questionsArray[indexIncrement].answer);
@@ -156,7 +156,7 @@ function determineFalseAnswer(){
             });
            
             clearInterval(intervalId);
-            setTimeout(nextQuestion, 5000);
+            setTimeout(nextQuestion, 3000);
             
     }
 }
@@ -176,7 +176,7 @@ function determineTrueAnswer(){
           });
           
         clearInterval(intervalId);
-        setTimeout(nextQuestion, 5000);
+        setTimeout(nextQuestion, 3000);
 
         
         } else {
@@ -191,7 +191,7 @@ function determineTrueAnswer(){
             }); 
             
             clearInterval(intervalId);
-            setTimeout(nextQuestion, 5000);
+            setTimeout(nextQuestion, 3000);
         
         }
 }
@@ -224,7 +224,7 @@ $("#trueButton").one("click", function(){
       });
       
     clearInterval(intervalId);
-    setTimeout(nextQuestion, 5000);
+    setTimeout(nextQuestion, 3000);
    
     } else {
         $("#answer").text("Wrong! The correct answer is " + questionsArray[indexIncrement].answer);
@@ -237,7 +237,7 @@ $("#trueButton").one("click", function(){
         }); 
         
         clearInterval(intervalId);
-        setTimeout(nextQuestion, 5000);
+        setTimeout(nextQuestion, 3000);
     }
 });
 
@@ -256,7 +256,7 @@ $("#falseButton").one("click", function(){
       });
       
     clearInterval(intervalId);
-    setTimeout(nextQuestion, 5000);
+    setTimeout(nextQuestion, 3000);
 
     } else {
         $("#answer").text("Wrong! The correct answer is " + questionsArray[indexIncrement].answer);
@@ -270,7 +270,7 @@ $("#falseButton").one("click", function(){
             });
             
           clearInterval(intervalId);
-          setTimeout(nextQuestion, 5000);
+          setTimeout(nextQuestion, 3000);
     }
     
 });
