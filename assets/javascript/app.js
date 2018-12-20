@@ -70,7 +70,7 @@ function timerCountdown() {
       $("#falseButton").hide();
       $("#startButton").hide()
       $.ajax({
-          url: "api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+          url: "https://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
           method: "GET"
       }).then(function(response) {
           $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
@@ -122,7 +122,7 @@ function endGame(){
     correctAnswer = 0;
     wrongAnswer = 0;
     $.ajax({
-        url: "api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+        url: "https://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
         method: "GET"
       }).then(function(response) { 
           $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
@@ -136,7 +136,7 @@ function determineFalseAnswer(){
         $("#answer").text("Correct");
         correctAnswer++;
         $.ajax({
-            url: "api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+            url: "https://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
             method: "GET"
           }).then(function(response) { 
               $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
@@ -149,7 +149,7 @@ function determineFalseAnswer(){
         
         wrongAnswer++;
             $.ajax({
-                url: "api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+                url: "https://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
                 method: "GET"
             }).then(function(response) { 
                 $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
@@ -169,7 +169,7 @@ function determineTrueAnswer(){
         correctAnswer++;
 
         $.ajax({
-            url: "api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+            url: "https://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
             method: "GET"
           }).then(function(response) {
               $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");  
@@ -184,7 +184,7 @@ function determineTrueAnswer(){
             wrongAnswer++;
 
             $.ajax({
-                url: "api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+                url: "https://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
                 method: "GET"
             }).then(function(response) {  
                 $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
@@ -217,7 +217,7 @@ $("#trueButton").one("click", function(){
     correctAnswer++;
 
     $.ajax({
-        url: "api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+        url: "https://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
         method: "GET"
       }).then(function(response) {
           $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");  
@@ -230,7 +230,7 @@ $("#trueButton").one("click", function(){
         $("#answer").text("Wrong! The correct answer is " + questionsArray[indexIncrement].answer);
         wrongAnswer++;
         $.ajax({
-            url: "api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+            url: "https://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
             method: "GET"
         }).then(function(response) {  
             $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
@@ -249,7 +249,7 @@ $("#falseButton").one("click", function(){
     correctAnswer++;
 
     $.ajax({
-        url: "api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+        url: "https://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
         method: "GET"
       }).then(function(response) { 
           $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
@@ -263,7 +263,7 @@ $("#falseButton").one("click", function(){
         
         wrongAnswer++;
           $.ajax({
-              url: "api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+              url: "https://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
               method: "GET"
             }).then(function(response) {
                 $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
