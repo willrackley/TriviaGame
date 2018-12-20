@@ -3,7 +3,7 @@ $(document).ready(function() {
 //----VARIABLES----//
 var correctAnswer = 0;
 var wrongAnswer = 0;
-var timeRemaining = 30;
+var timeRemaining = 15;
 var indexIncrement = 0;
 var intervalId;
 var clockRunning = false;
@@ -17,7 +17,7 @@ function startGame(){
     $("#timer").hide();
     $("#trueButton").hide();
     $("#falseButton").hide();
-    $("#question").text("There are 10 true or false questions that all have to do with man's best friend. You will have 30 seconds to answer each question. Good Luck!")
+    $("#question").text("There are 10 true or false questions that all have to do with man's best friend. You will have 15 seconds to answer each question. Good Luck!")
 }
 
 function displayQuestion(){
@@ -27,7 +27,8 @@ function displayQuestion(){
     $("#gifPic").html("");
     $("#trueButton").show();
     $("#falseButton").show();
-    timeRemaining = 10;
+    $("#answer").text("");
+    timeRemaining = 15;
     clockRunning = true;
     intervalId = setInterval(timerCountdown, 1000);
     console.log("number of wins " + correctAnswer);
@@ -40,7 +41,7 @@ function nextQuestion(){
     
     $("#startButton").hide();
     randGif = Math.floor(Math.random() * 20);
-    timeRemaining = 10;
+    timeRemaining = 15;
     intervalId = setInterval(timerCountdown, 1000);
     clockRunning = true;
     $("#trueButton").show();
@@ -69,7 +70,7 @@ function timerCountdown() {
       $("#falseButton").hide();
       $("#startButton").hide()
       $.ajax({
-          url: "http://api.giphy.com/v1/gifs/search?q=sad+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+          url: "http://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
           method: "GET"
       }).then(function(response) {
           $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
@@ -110,18 +111,18 @@ function endGame(){
     clockRunning = false;
     $("#question").html("Correct Answers: " + correctAnswer + "\n" + "Incorrect Answers: " + wrongAnswer).wrap('<pre />');
     $("#timer").text("");
-    $("#answer").text("");
+    $("#answer").text("Game Over");
     $("#trueButton").hide();
     $("#falseButton").hide();
     $("#startButton").hide()
     $("#tryAgainButton").show();
     $("#tryAgainButton").text("Try Again");
-    timeRemaining = 30;
+    timeRemaining = 15;
     indexIncrement = 0;
     correctAnswer = 0;
     wrongAnswer = 0;
     $.ajax({
-        url: "http://api.giphy.com/v1/gifs/search?q=happy+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+        url: "http://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
         method: "GET"
       }).then(function(response) { 
           $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
@@ -135,7 +136,7 @@ function determineFalseAnswer(){
         $("#answer").text("Correct");
         correctAnswer++;
         $.ajax({
-            url: "http://api.giphy.com/v1/gifs/search?q=sad+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+            url: "http://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
             method: "GET"
           }).then(function(response) { 
               $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
@@ -148,7 +149,7 @@ function determineFalseAnswer(){
         
         wrongAnswer++;
             $.ajax({
-                url: "http://api.giphy.com/v1/gifs/search?q=happy+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+                url: "http://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
                 method: "GET"
             }).then(function(response) { 
                 $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
@@ -168,7 +169,7 @@ function determineTrueAnswer(){
         correctAnswer++;
 
         $.ajax({
-            url: "http://api.giphy.com/v1/gifs/search?q=happy+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+            url: "http://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
             method: "GET"
           }).then(function(response) {
               $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");  
@@ -183,7 +184,7 @@ function determineTrueAnswer(){
             wrongAnswer++;
 
             $.ajax({
-                url: "http://api.giphy.com/v1/gifs/search?q=sad+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+                url: "http://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
                 method: "GET"
             }).then(function(response) {  
                 $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
@@ -216,7 +217,7 @@ $("#trueButton").one("click", function(){
     correctAnswer++;
 
     $.ajax({
-        url: "http://api.giphy.com/v1/gifs/search?q=happy+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+        url: "http://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
         method: "GET"
       }).then(function(response) {
           $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");  
@@ -229,7 +230,7 @@ $("#trueButton").one("click", function(){
         $("#answer").text("Wrong! The correct answer is " + questionsArray[indexIncrement].answer);
         wrongAnswer++;
         $.ajax({
-            url: "http://api.giphy.com/v1/gifs/search?q=sad+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+            url: "http://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
             method: "GET"
         }).then(function(response) {  
             $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
@@ -248,7 +249,7 @@ $("#falseButton").one("click", function(){
     correctAnswer++;
 
     $.ajax({
-        url: "http://api.giphy.com/v1/gifs/search?q=sad+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+        url: "http://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
         method: "GET"
       }).then(function(response) { 
           $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
@@ -262,7 +263,7 @@ $("#falseButton").one("click", function(){
         
         wrongAnswer++;
           $.ajax({
-              url: "http://api.giphy.com/v1/gifs/search?q=happy+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
+              url: "http://api.giphy.com/v1/gifs/search?q=cute+dog&api_key=17HlEsY0GKfVxvXvmi1HZw2RI94pGhFc&limit=20",
               method: "GET"
             }).then(function(response) {
                 $("#gifPic").html("<img src=" + response.data[randGif].images.original.url + ">");
